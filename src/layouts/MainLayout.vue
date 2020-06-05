@@ -18,6 +18,9 @@
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
+    <div>
+      iasjia
+    </div>
 
     <q-drawer
       v-model="leftDrawerOpen"
