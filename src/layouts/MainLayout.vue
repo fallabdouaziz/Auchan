@@ -61,7 +61,7 @@ export default {
       leftDrawerOpen: false,
       essentialLinks: [
         {
-          title: 'Docs',
+          title: 'fall',
           caption: 'quasar.dev',
           icon: 'school',
           link: 'https://quasar.dev'
@@ -95,6 +95,12 @@ export default {
           caption: '@QuasarFramework',
           icon: 'public',
           link: 'https://facebook.quasar.dev'
+        },
+        {
+          title: 'Quasar Awesome',
+          caption: 'Community Quasar projects',
+          icon: 'favorite',
+          link: 'https://awesome.quasar.dev'
         },
         {
           title: 'Quasar Awesome',
