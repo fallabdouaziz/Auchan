@@ -21,7 +21,9 @@
     <div>
       iasjia
     </div>
-
+    <div>
+      fallllll
+    </div>
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
