@@ -1,4 +1,4 @@
-# Quasar App (auchan)
+# Projet Auchan
 
 A Quasar Framework app
 
