@@ -61,7 +61,7 @@ export default {
       leftDrawerOpen: false,
       essentialLinks: [
         {
-          title: 'Docs',
+          title: 'Documentation',
           caption: 'quasar.dev',
           icon: 'school',
           link: 'https://quasar.dev'
