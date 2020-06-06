@@ -23,13 +23,8 @@
       content-class="bg-grey-1"
     >
       <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Essential Links
-        </q-item-label>
         <EssentialLink
+          class="q-mt-md"
           v-for="link in essentialLinks"
           :key="link.title"
           v-bind="link"
@@ -68,7 +63,6 @@ export default {
         },
         {
           title: 'Offre',
-          caption: 'github.com/quasarframework',
           icon: 'code',
           link: 'https://github.com/quasarframework'
         },
@@ -78,13 +72,8 @@ export default {
           link: 'https://chat.quasar.dev'
         },
         {
-          title: 'Forum',
-          icon: 'record_voice_over',
-          link: 'https://forum.quasar.dev'
-        },
-        {
           title: 'Messagerie',
-          icon: 'rss_feed',
+          icon: 'chat',
           link: 'https://twitter.quasar.dev'
         },
         {
