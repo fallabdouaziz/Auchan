@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar>
+      <q-toolbar class="bg-red">
         <q-btn
           flat
           dense
@@ -12,18 +12,10 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          <q-img src="../assets/img/Auchan.png" width="150px" @click="openHome" style="cursor: pointer"></q-img>
         </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
-    <div>
-      iasjia
-    </div>
-    <div>
-      fallllll
-    </div>
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
@@ -60,58 +52,45 @@ export default {
   components: {
     EssentialLink
   },
-
+  methods: {
+    openHome () {
+      this.$router.push('/')
+    }
+  },
   data () {
     return {
       leftDrawerOpen: false,
       essentialLinks: [
         {
-          title: 'val',
-          caption: 'quasar.dev',
-          icon: 'school',
-          link: 'https://quasar.dev'
+          title: 'Comment ça marche',
+          icon: 'help',
+          link: '/info'
         },
         {
-          title: 'Github',
+          title: 'Offre',
           caption: 'github.com/quasarframework',
           icon: 'code',
           link: 'https://github.com/quasarframework'
         },
         {
-          title: 'Discord Chat Channel',
-          caption: 'chat.quasar.dev',
+          title: 'Demande',
           icon: 'chat',
           link: 'https://chat.quasar.dev'
         },
         {
           title: 'Forum',
-          caption: 'forum.quasar.dev',
           icon: 'record_voice_over',
           link: 'https://forum.quasar.dev'
         },
         {
-          title: 'Twitter',
-          caption: '@quasarframework',
+          title: 'Messagerie',
           icon: 'rss_feed',
           link: 'https://twitter.quasar.dev'
         },
         {
-          title: 'Facebook',
-          caption: '@QuasarFramework',
+          title: 'chat',
           icon: 'public',
           link: 'https://facebook.quasar.dev'
-        },
-        {
-          title: 'Quasar Awesome',
-          caption: 'Community Quasar projects',
-          icon: 'favorite',
-          link: 'https://awesome.quasar.dev'
-        },
-        {
-          title: 'Quasar Awesome',
-          caption: 'Community Quasar projects',
-          icon: 'favorite',
-          link: 'https://awesome.quasar.dev'
         }
       ]
     }
