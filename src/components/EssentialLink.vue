@@ -3,7 +3,7 @@
     clickable
     tag="a"
     target="_blank"
-    :href="link"
+    @click="openLink(link)"
   >
     <q-item-section
       v-if="icon"
@@ -43,6 +43,11 @@ export default {
     icon: {
       type: String,
       default: ''
+    }
+  },
+  methods: {
+    openLink (value) {
+      this.$router.push(value)
     }
   }
 }

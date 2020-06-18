@@ -22,7 +22,7 @@
               <p class="text-h6">Vous n'avez pas de compte</p>
             </div>
             <div class="row q-mt-md">
-              <q-btn label="Créer mon compte" color="red" class="col-xs-12"/>
+              <q-btn label="Créer mon compte" color="red" class="col-xs-12" to="/inscription"/>
             </div>
           </div>
         </div>
