@@ -37,6 +37,9 @@ export default {
       email: '',
       password: ''
     }
+  },
+  mounted () {
+    this.$store.dispatch('setAllEtudiant')
   }
 }
 </script>

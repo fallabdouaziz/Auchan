@@ -7,6 +7,7 @@ const routes = [
       { path: '', component: () => import('pages/Connexion.vue') },
       { path: '/inscription', component: () => import('pages/Inscription.vue') },
       { path: '/connexion', component: () => import('pages/Connexion.vue') },
+      { path: '/message', component: () => import('pages/Chat.vue') },
       { path: '/profile', component: () => import('pages/Profile') }
     ]
   }
