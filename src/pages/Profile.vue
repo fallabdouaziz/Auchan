@@ -10,46 +10,31 @@
       </q-card>
       </div>
       <div class="col-5">
-        <p>Nom :  Prenom :</p>
-        <p>Niveau :</p>
+        <p>{{user.nom}}  {{user.prenom}} </p>
+        <p>Niveau : {{user.niveau}}</p>
       </div>
     </div>
     <div class="row q-mt-md">
-      <div class="col-xs-12 q-pr-xs">
-        <q-input type="textarea" filled label="description"/>
+      <div class="col-12">
+        <q-card class="bg-grey-4">
+          <q-card-section horizontal>
+            <q-btn label="Offres" flat @click="ouvrirOffre"/>
+            <q-space></q-space>
+            <q-btn label="réponses" flat @click="ouvrirReponse"/>
+            <q-space></q-space>
+            <q-btn label="demandes" flat @click="ouvrirDemande"/>
+          </q-card-section>
+        </q-card>
       </div>
     </div>
-    <div class="row q-mt-md">
-      <div class="col-12 q-pr-xs">
-        <p>Matiere</p>
-        <q-select v-model="mat" :options="matiere" label="Liste des matieres"/>
-      </div>
+    <div class="row q-mt-md" v-if="booloffre">
+     <offres :iduser="user.id"></offres>
     </div>
-    <div class="row q-mt-md">
-      <div class="col-xs-12 col-sm-7">
-        <p>Disponibilité</p>
-        <q-date v-model="date" color="red"/>
-      </div>
-      <div class="col-xs-12 col-sm-5 q-mt-xs">
-        <p>Horaires (Plusieurs choix possibles)</p>
-        <q-checkbox label="8h-10h"  v-model="val"/>
-        <q-checkbox label="10h-12h" v-model= "val"/>
-      </div>
+    <div class="row q-mt-md" v-if="boolreponse">
+     <reponses :iduser="user.id"></reponses>
     </div>
-    <div class="row q-mt-md">
-      <div class="col-12 q-pr-xs">
-        <q-file label="carte d'identité"/>
-      </div>
-    </div>
-    <div class="row q-mt-md">
-      <div class="col-12 q-pr-xs">
-        <q-file label="justificatif scolaire" accept=".jpg,image/*"/>
-      </div>
-    </div>
-    <div class="row q-mt-md flex justify-center">
-      <div>
-        <q-btn label="Sauvegarder"  color="red"/>
-      </div>
+    <div class="row q-mt-md" v-if="booldemande">
+     <demandes :iduser="user.id"></demandes>
     </div>
   </q-page>
 </template>
@@ -59,10 +44,44 @@ export default {
   // name: 'PageName',
   data () {
     return {
+      booloffre: true,
+      booldemande: false,
+      boolreponse: false,
       mat: '',
       date: '',
       val: false,
       matiere: ['math', 'francais', 'anglais', 'espagnol']
+    }
+  },
+  mounted () {
+    this.$store.dispatch('setAllEtudiant')
+  },
+  methods: {
+    ouvrirOffre () {
+      this.booloffre = true
+      this.boolreponse = false
+      this.booldemande = false
+      return this.booloffre
+    },
+    ouvrirDemande () {
+      this.booldemande = true
+      this.booloffre = false
+      this.boolreponse = false
+      return this.booldemande
+    },
+    ouvrirReponse () {
+      this.booldemande = false
+      this.booloffre = false
+      this.boolreponse = true
+      return this.boolreponse
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.getters.getUser
+    },
+    getEtudiant () {
+      return this.$store.getters.getAllEtudiants
     }
   }
 }

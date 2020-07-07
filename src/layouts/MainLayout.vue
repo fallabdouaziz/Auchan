@@ -40,7 +40,6 @@
 
 <script>
 import EssentialLink from 'components/EssentialLink'
-
 export default {
   name: 'MainLayout',
 
@@ -52,36 +51,27 @@ export default {
       this.$router.push('/')
     }
   },
+  computed: {
+    estConnecter () {
+      return this.$store.getters.estConnecter
+    },
+    essentialLinks () {
+      if (this.estConnecter) {
+        return [{ title: 'Comment ça marche', icon: 'help', link: '/info' },
+          { title: 'Offre', icon: 'code', link: '/offre' },
+          { title: 'Demande', icon: 'chat', link: 'demande' },
+          { title: 'Profile', icon: 'perm_identity', link: '/profile' },
+          { title: 'Se déconnecter', icon: 'logout', link: '/deconnecter' }
+        ]
+      } else {
+        return [{ title: 'Se connecter', icon: 'login', link: '/connexion' },
+          { title: 'S\'inscrire', icon: 'mdi-close-octagon', link: 'inscription' }]
+      }
+    }
+  },
   data () {
     return {
-      leftDrawerOpen: false,
-      essentialLinks: [
-        {
-          title: 'Comment ça marche',
-          icon: 'help',
-          link: '/info'
-        },
-        {
-          title: 'Offre',
-          icon: 'code',
-          link: 'https://github.com/quasarframework'
-        },
-        {
-          title: 'Demande',
-          icon: 'chat',
-          link: 'https://chat.quasar.dev'
-        },
-        {
-          title: 'Messagerie',
-          icon: 'chat',
-          link: 'https://twitter.quasar.dev'
-        },
-        {
-          title: 'chat',
-          icon: 'public',
-          link: 'https://facebook.quasar.dev'
-        }
-      ]
+      leftDrawerOpen: false
     }
   }
 }

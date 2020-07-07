@@ -9,10 +9,16 @@
               <q-input label="Email" v-model="email"></q-input>
             </div>
             <div class="q-mt-md">
-              <q-input label="Password" v-model="password"></q-input>
+              <q-input label="Password" v-model="password" :type="pwd ? 'password' :'text'">
+                <template v-slot:append>
+                  <q-icon :name= "pwd ?'visibility_off' : 'visibility'"
+                  @click="pwd= !pwd"
+                  />
+                </template>
+              </q-input>
             </div>
             <div class="q-mt-md row">
-              <q-btn label="Je me connecte" color="primary" class="col-xs-12"/>
+              <q-btn label="Je me connecte" color="primary" class="col-xs-12" @click="connexion()"/>
             </div>
       </div>
     </div>
@@ -30,16 +36,29 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   // name: 'PageName',
   data () {
     return {
+      pwd: true,
       email: '',
       password: ''
     }
   },
+  computed: {
+    ...mapGetters(['estConnecter'])
+  },
   mounted () {
     this.$store.dispatch('setAllEtudiant')
+  },
+  methods: {
+    connexion () {
+      this.$store.dispatch('getConnexion', {
+        email: this.email,
+        password: this.password
+      })
+    }
   }
 }
 </script>

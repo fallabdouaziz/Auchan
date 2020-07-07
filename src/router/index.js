@@ -13,7 +13,6 @@ Vue.use(VueRouter)
  * async/await or return a Promise which resolves
  * with the Router instance.
  */
-
 export default function (/* { store, ssrContext } */) {
   const Router = new VueRouter({
     scrollBehavior: () => ({ x: 0, y: 0 }),
@@ -25,6 +24,5 @@ export default function (/* { store, ssrContext } */) {
     mode: 'history',
     base: process.env.VUE_ROUTER_BASE
   })
-
   return Router
 }

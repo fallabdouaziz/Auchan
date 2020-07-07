@@ -1,4 +1,4 @@
-
+import store from '../store'
 const routes = [
   {
     path: '/',
@@ -11,9 +11,19 @@ const routes = [
       { path: '/information', component: () => import('pages/Information.vue') },
       { path: '/offre', component: () => import('pages/Offre.vue') },
       { path: '/demande', component: () => import('pages/Demande.vue') },
-      { path: '/creationoffre', component: () => import('pages/CreationOffre.vue') },
       { path: '/creationdemande', component: () => import('pages/CreationDemande.vue') },
-      { path: '/profile', component: () => import('pages/Profile') }
+      { path: '/creationoffre', component: () => import('pages/CreationOffre.vue') },
+      {
+        path: '/profile',
+        component: () => import('pages/Profile'),
+        beforeEnter: (to, from, next) => {
+          if (!store.getters.estConnecter) {
+            return next('/connexion')
+          }
+          next()
+        }
+      },
+      { path: '/file', component: () => import('pages/file') }
     ]
   }
 ]

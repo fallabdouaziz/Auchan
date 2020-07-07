@@ -1,3 +1,9 @@
 export default {
-  etudiants: []
+  users: [],
+  offres: [],
+  demandes: [],
+  user: null,
+  TOKEN: null,
+  message: '',
+  bool: false
 }

@@ -1,46 +1,41 @@
 <template>
   <q-page padding>
-    <div class="q-pa-md">
-      <div class="row flex justify-center">
-        <h5 style="color: red">Offres</h5>
-      </div>
-      <div v-for="offre in offres" :key="offre">
-        <div class="column justify-center" style="border: 3px solid red">
-          <div class="col-auto" style="background-color: lightgray">
-            <div class="row items-center">
-              <div class="col">
-                <q-card style="width:80px; height: 80px;">
-                  <q-card-section>
-                    <img src="src/assets/sad.svg" alt="image">
-                  </q-card-section>
-                </q-card>
-              </div>
-              <div class="col">
-                <p>{{offre.nom}}</p>
-                <p>{{offre.prenom}}</p>
-                <p>{{offre.niveauScolaire}}</p>
-              </div>
-              <div class="col">
-                <q-btn label="Accepter" type="submit" color="primary"/>
-              </div>
-            </div>
-          </div>
-          <div class="col-auto">
-            <div class="row">
-              <div class="col">
-                <p v-if="offre.certifie">Certifié</p>
-                <p>Note: {{offre.note}}</p>
-                <p>Date de disponibilités:</p>
-                <p>{{offre.disponibilite}}</p>
-              </div>
-              <div class="col" style="background-color: lightcoral; padding: 5px">
-                <p>{{offre.description}}</p>
-              </div>
-            </div>
-          </div>
+    <div class="row q-pa-md">
+      <div class=" row col-xs-12">
+        <div class="col-xs-7">
+          <q-input type="search" label="Matiere" v-model="matiere"/>
         </div>
-        <br/>
+        <div class="col-xs-4 q-mt-md">
+          <q-btn label="rechercher" color="blue" @click="chercheOffre"/>
+        </div>
       </div>
+      <div class=" row flex justify-center">
+        <h4 class="col-xs-12 offset-3">Liste des Offres</h4>
+        <router-link to="/CreationOffre">offre</router-link>
+      </div>
+      <q-card class="col-xs-12 q-mt-md" v-for="(offre, i) in getOffres" :key="i">
+        <q-card-section class="row bg-red-4">
+          <div class="col-xs-3">
+            <p>{{offre.matiere}}</p>
+          </div>
+          <q-space></q-space>
+          <div class="col-xs-5">
+            <q-btn label="Selectioner" color="red" class="q-pr-xs" @click="choisirOffre(offre.idoffre)"/>
+          </div>
+        </q-card-section>
+        <q-separator color="red"></q-separator>
+        <q-card-section class="row">
+          <div class="col-xs-6">
+            <p>Date de disponibilité :</p>
+            <p>{{offre.datedebut}}</p>
+            <p>{{offre.horaire}}</p>
+          </div>
+          <q-separator vertical color="red"></q-separator>
+          <div class="col-xs-5 q-pl-xs">
+            <p>{{offre.description}}</p>
+          </div>
+        </q-card-section>
+      </q-card>
     </div>
   </q-page>
 </template>
@@ -50,10 +45,42 @@ export default {
   // name: 'PageName',
   data () {
     return {
+      matiere: '',
+      recherche: [],
       offres: [
-        { nom: 'Messiant', prenom: 'Valentin', niveauScolaire: 'Bac+3 informatique', certifie: true, note: '5/5', disponibilite: 'Vendredi 26, 16h-18h', description: 'Je suis disponible pour travailler les mathématiques' },
-        { nom: 'Vandaele', prenom: 'Maxime', niveauScolaire: 'Bac+3 Fonderie', certifie: true, note: '4/5', disponibilite: 'Jeudi 25, 14h-18h', description: 'Je suis disponible pour travailler la physique' }
+        { nom: 'fall', prenom: 'abdou', niveauScolaire: 'Bac+3 informatique', certifie: false, note: '5/5', disponibilite: 'Vendredi 26, 16h-18h', description: 'Je suis disponible pour travailler les mathématiques' },
+        { nom: 'pouye', prenom: 'ndiasse', niveauScolaire: 'Bac+3 Fonderie', certifie: false, note: '4/5', disponibilite: 'Jeudi 25, 14h-18h', description: 'Je suis disponible pour travailler la physique' }
       ]
+    }
+  },
+  created () {
+    this.$store.dispatch('getAllOffres', { id: this.user.id })
+  },
+  computed: {
+    user () {
+      return this.$store.getters.getUser
+    },
+    getOffres () {
+      return this.$store.getters.getAllOffres
+    },
+    cherche1 () {
+      return this.offres.findIndex((data) => {
+        if (data.nom === this.matiere) {
+          return data
+        }
+      })
+    }
+  },
+  methods: {
+    choisirOffre (value) {
+      this.$store.dispatch('updateOffre', { id: this.user.id, idoffre: value })
+    },
+    chercheOffre () {
+      this.offres.findIndex((data) => {
+        if (data.nom === this.matiere) {
+          this.recherche = data
+        }
+      })
     }
   }
 }
